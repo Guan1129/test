@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+const DynamicRoutes = [
+    {
+        path:"",
+        component:'Layout',
+        name:'container',
+        redirect:"home",
+        meta:{
+            requiresAuth:true,
+            name:"首页"
+        },
+        children:[
+            {
+                path:"home",
+                component:'Home',
+                name:"home",
+                meta:{
+                    // 匹配规则
+                    name:"首页",
+                    icon:"icon-name"
+                }
+            }
+        ]
+    },
+]
+var app=DynamicRoutes.find(item=>{
+ return   item.path==''
+})
+console.log(app);
+
+
+
+
+
+      var vip=
+     [
+        {
+            "name": "订单管理",
+            "children": [
+                {
+                    "name": "订单列表"
+                },
+                {
+                    "name": "生产管理",
+                    "children": [
+                        {
+                            "name": "生产列表"
+                        }
+                    ]
+                },
+                /* {
+                    "name": "退货管理"
+                } */
+            ]
+        },
+       /*  {
+            "name": "产品管理",
+            "children": [
+                {
+                    "name": "产品列表"
+                },
+                {
+                    "name": "产品分类"
+                }
+            ]
+        } */
+    ]
+    const arr = [
+    {
+        path: '/order',
+        meta: {
+            name: '订单管理'
+        },
+        children: [
+            {
+                path: 'list',
+                meta: {
+                    name: '订单列表'                   
+                }
+            },
+            {
+                path: 'product',
+                meta: {
+                    name: '生产管理'
+                },
+                children: [
+                    {
+                        path: 'list',
+                        meta: {
+                            name: '生产列表'
+                        }
+                    },
+                    {
+                        path: 'review',
+                        meta: {
+                            name: '审核管理'
+                        }
+                    }
+                ]
+            },
+            {
+                path: 'returnGoods',
+                meta: {
+                    name: '退货管理'
+                }
+            }
+        ]
+    },
+    {
+        path: '/goods',
+        meta: {
+            name: '产品管理'
+        },
+        children: [
+            {
+                path: 'list',
+                meta: {
+                    name: '产品列表'
+                }
+            },
+            {
+                path: 'classify',
+                meta: {
+                    name: '产品分类'  
+                }
+            }
+        ]
+    }
+]
+    function fun(vip,arr){
+        var newarr=[]
+       for (var a of arr){
+        for(var v of vip){
+            if(v.name==a.meta.name){
+                if(v.children && v.children.length>0){
+                    a.children=   fun(v.children,a.children)
+                }
+            newarr.push(a)
+            }
+        }
+       }
+       return newarr
+    }
+
+    var newarr=fun(vip,arr)
+    console.log(newarr);
+    console.log(arr);
+    
+    
+    </script>
+</body>
+</html>
