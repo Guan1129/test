@@ -1,0 +1,181 @@
+<!-- 
+    一、ES6简介
+        1.1 ES6
+            ECMASCript 下一个版本 
+            ECMAScript 6.0（以下简称 ES6）是 JavaScript 语言的下一代标准，已经在 2015 年 6 月正式发布了
+
+        1.2 ECMAScript 和 JavaScript 的关系
+            ECMAScript规范 JavaScript实现
+
+            JavaScript：
+                ECMAScript 核心语法
+                DOM 
+                BOM
+
+        1.3 ES6 与 ECMAScript 2015 的关系
+            ES6 既是一个历史名词，也是一个泛指，含义是 5.1 版以后的 
+            JavaScript 的下一代标准，涵盖了 ES2015、ES2016、ES2017 等等，而 ES2015 则是正式名称，特指该年发布的正式版本的语言标准
+
+        1.4 语法提案的批准流程
+            Stage 0 - Strawman（展示阶段）
+            Stage 1 - Proposal（征求意见阶段）
+            Stage 2 - Draft（草案阶段）
+            Stage 3 - Candidate（候选人阶段）
+            Stage 4 - Finished（定案阶段）
+            一个提案只要能进入 Stage 2，就差不多肯定会包括在以后的正式标准里面
+
+        1.5 ES6兼容
+
+            一、桌面端浏览器对ES2015的支持情况
+                Chrome：51 版起便可以支持 97% 的 ES6 新特性。
+                Firefox：53 版起便可以支持 97% 的 ES6 新特性。
+                Safari：10 版起便可以支持 99% 的 ES6 新特性。
+                IE：Edge 15可以支持 96% 的 ES6 新特性。Edge 14 可以支持 93% 的 ES6 新特性。（IE7~11 基本不支持 ES6）
+
+            二、移动端浏览器对ES2015的支持情况
+                iOS：10.0 版起便可以支持 99% 的 ES6 新特性。
+                Android：基本不支持 ES6 新特性（5.1 仅支持 25%）
+
+            三、服务器对ES2015的支持情况
+                Node.js：6.5 版起便可以支持 97% 的 ES6 新特性。（6.0 支持 92%）
+
+            如何使用ES6的新特性，又能保证浏览器的兼容？
+                针对 ES6 的兼容性问题，很多团队为此开发出了多种语法解析转换工具，把我们写的 ES6 语法转换成 ES5，
+                相当于在 ES6 和浏览器之间做了一个翻译官。比较通用的工具方案有 babel，jsx，traceur，es6-shim 等。
+
+    二、babel转码器  ES6 语法转换成 ES5
+        Babel 是一个广泛使用的 ES6 转码器，可以将 ES6 代码转为 ES5 代码，从而在老版本的浏览器执行
+        在项目目录中，安装 Babel
+            1.安装babel转码器
+                cnpm install --save-dev @babel/core
+            2.配置文件.babelrc
+                该文件用来设置转码规则和插件
+                {
+                    "presets": [],
+                    "plugins": []
+                }
+            3.最新转码规则
+                cnpm install --save-dev @babel/preset-env
+                配置文件规则：
+                    {
+                    "presets": [
+                        "@babel/env"
+                    ],
+                    "plugins": []
+                }
+            4.命令行转码
+                cnpm install --save-dev @babel/cli
+            5.命令行转码 语法
+                注意：npm安装包的管理工具    npx 调用你安装的包执行什么内容
+                a:转码结果输出到命令行窗口输出
+                    npx babel example.js
+
+                b:转码结果写入一个文件 --out-file 或 -o 参数指定输出文件
+                    npx babel example.js --out-file compiled.js
+                    # 或者
+                    npx babel example.js -o compiled.js
+
+                c:整个目录转码
+                    # --out-dir 或 -d 参数指定输出目录
+                    npx babel src --out-dir lib
+                    # 或者
+                    npx babel src -d lib
+    三、ES6基本语法
+        3.1 let var const (重点-常用)
+            let 特点：
+                1.块级作用域  {} 
+                2.不存在变量提升  
+                3.暂时性死区 
+                4.不可以重复声明  
+
+            const 声明一个只读的常量。一旦声明，常量的值就不能改变
+                 const一旦声明变量，就必须立即初始化，不能留到以后赋值
+                特点：
+                    1.块级作用域  {} 
+                    2.不可以重复声明 
+                    3.一旦声明，常量的值就不能改变
+                    4.变量不可以修改
+                    5.不存在变量提升  
+
+
+            注意：什么时候使用const
+                 定义的函数名 或者变量名 不想被修改 可以使用const 
+
+        3.2 变量的解构赋值 (重点-常用)
+            1.数组的解构赋值 
+
+                数组解构赋值是按顺序的 依次给变量赋值 右侧的内容
+                    let [a,b,c]=[10,20,30];
+                    let [c,b,,a]=[10,20,30,40];
+
+                用途：定义两个变量 a,b 请用一行代码实现对换？ [a,b]=[b,a]
+
+            2.对象的结构赋值
+
+                对象的属性没有次序，变量必须与属性同名，才能取到正确的值
+                    let { bar, foo } = { foo: 'aaa', bar: 'bbb' };
+
+                小程序里面 获取data数据  this.data.属性
+                    let {isShow,list}=this.data;
+                    小程序：
+                        var isShow=this.data.isShow;
+                        var list=this.data.list;
+                        ...
+        3.3 字符串的扩展  (重点--模板字符串-常用)
+            1.字符串的遍历器接口  for ...of  遍历字符串和数组  对象不可以
+            2.模板字符串
+                数据拼接的时候 '' ""+拼接
+                语法:
+                    `${变量名}`
+                模板字符串（template string）是增强版的字符串，用反引号（`）标识。
+                它可以当作普通字符串使用，也可以用来定义多行字符串，或者在字符串中嵌入变量
+
+        3.4 字符串新增方法 
+                1.ES6 又提供了三种新方法。
+                    indexOf():查到当前的内容 招不到返回-1  找到获取第一次的下标
+
+                    includes()：返回布尔值，表示是否找到了参数字符串。
+                    startsWith()：返回布尔值，表示参数字符串是否在原字符串的头部。
+                    endsWith()：返回布尔值，表示参数字符串是否在原字符串的尾部
+
+                2.repeat() 重复 
+                    repeat方法返回一个新字符串，表示将原字符串重复n次
+                    参数如果是小数，会被取整
+                    如果repeat的参数是负数或者Infinity，会报错
+
+                3.padStart()，padEnd() 
+                    ES2017 引入了字符串补全长度的功能。如果某个字符串不够指定长度，
+                    会在头部或尾部补全。padStart()用于头部补全，padEnd()用于尾部补全
+                    
+                    padStart()和padEnd()一共接受两个参数，第一个参数是字符串补全生效的最大长度，第二个参数是用来补全的字符串
+
+                4.trimStart()和trimEnd()
+                    ES2019 对字符串实例新增了trimStart()和trimEnd()这两个方法。它们的行为与trim()一致，
+                    trimStart()消除字符串头部的空格，trimEnd()消除尾部的空格。它们返回的都是新字符串，不会修改原始字符串。
+
+                    应用：比如 注册账号 用户输入账号的时候 不小心 点了键盘空格    
+
+        3.5 数组 
+                1.扩展运算符 (重点---常用) 
+                2.扩展方法---(理解)
+                    Array.from()
+                    Array.of()
+                    数组实例的 copyWithin()
+                    数组实例的 find() 和 findIndex()
+                    数组实例的 fill()
+                    数组实例的 entries()，keys() 和 values()
+                    数组实例的 includes()
+
+        3.6 函数 (重点---常用)
+                1.函数参数的默认值
+                2.rest 参数
+                3.箭头函数
+            
+
+        
+
+                
+                
+                
+
+ -->

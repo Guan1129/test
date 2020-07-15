@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var modo=(function(){
+            var hallow='hellow';      
+            var info={
+                'name':'beixi',
+                'age':23             
+            }           
+           /*  return {
+                hallow:hallow,
+                info:info
+            } */
+        })()
+    var mode2=(function(modo){
+        function modoname(modo){
+            return modo.info.name
+        }
+        modo.fun1=function(){
+          return 'nisnidnf'
+        }
+        return {
+            modoname:modoname,
+            modo:modo
+        }
+    })(modo||{})
+    console.log(mode2.modo.fun1())
+    </script>
+</body>
+</html>

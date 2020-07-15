@@ -1,0 +1,17 @@
+module.exports=[
+    {
+        id:1,
+        author:'作者1',
+        pinglun:'那你是男的佛奥索尼大法那搜到你发1'
+    },
+    {
+        id:2,
+        author:'作者2',
+        pinglun:'那你是男的佛奥索尼大法那搜到你发2'
+    },
+    {
+        id:3,
+        author:'作者3',
+        pinglun:'那你是男的佛奥索尼大法那搜到你发3'
+    }
+]

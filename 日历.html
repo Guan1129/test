@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_234130_nem7eskcrkpdgqfr.css">
+    <link rel="stylesheet" href="schedule.css">
+    <style>
+        #canlender{width: 300px;}
+    </style>
+</head>
+<body>
+    <div class="boxshaw" id="canlender"></div>
+    <script src="schedule.js"></script>
+    <script>
+       var canlender=new Schedule({
+           el:'#canlender',
+           clickCb:function(year,month,day){
+               console.log(year)
+           }
+       })
+    </script>
+</body>
+</html>

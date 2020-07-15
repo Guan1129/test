@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-1.12.3.min.js"></script>
+</head>
+<body>
+    <p class="p1"></p>
+    <p class="p2"></p>
+    <script>
+        function myPromise(url){
+           var promise=new Promise((resolve,reject)=>{
+            $.ajax({
+                type:'get',
+                url:url,
+                success:res=>{
+                    resolve(res)
+                },
+                error:err=>{
+                    reject(err)
+                }
+            })
+           })
+           return promise
+        }
+        
+        async function foo(){
+        var res=await  myPromise('http://localhost:3000/nows?id=1')
+            $('.p1').html(res.contenturl)
+            console.log(res);
+            
+        var data=await  myPromise('http://localhost:3000/'+res.contenturl) 
+            $('.p2').html(data[0].id)
+            console.log(data);
+            
+        }
+
+        foo()
+
+
+
+        /* myPromise('http://localhost:3000/nows?id=1')
+        .then(res=>{
+            console.log(res);
+        return    myPromise('http://localhost:3000/'+res.contenturl) 
+        },err=>{
+            console.log(err);
+            
+        })
+        .then(data=>{
+            console.log(data);
+            
+        },error=>{
+            console.log(error);
+            
+        }) */
+    </script>
+</body>
+</html>
